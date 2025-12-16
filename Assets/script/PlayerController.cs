@@ -1,23 +1,45 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float speed = 20f;
+    public float turnSpeed = 120f;
+    public float gravity = -9.81f;
+
+    float horizontalInput;
+    float forwardInput;
+
+    CharacterController controller;
+    Vector3 velocity;
+
     void Start()
     {
-        
+        controller = GetComponent<CharacterController>();
     }
-    public float speed = 20.0f;
-    public float turnSpeed = 30.0f;
-        public float horizontalInput;
-    public float forwardInput;
-    // Update is called once per frame
+
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         forwardInput = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.forward* Time.deltaTime *speed * forwardInput);
-        transform.Rotate(Vector3.up, turnSpeed*horizontalInput*Time.deltaTime);
+        transform.Rotate(Vector3.up, horizontalInput * turnSpeed * Time.deltaTime);
+
+        Vector3 move = transform.forward * forwardInput * speed;
+
+        if (controller.isGrounded && velocity.y < 0)
+            velocity.y = -2f;
+
+        velocity.y += gravity * Time.deltaTime;
+
+        controller.Move((move + velocity) * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("death")){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        }
     }
 }
