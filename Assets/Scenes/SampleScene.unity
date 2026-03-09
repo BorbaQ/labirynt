@@ -2755,6 +2755,8 @@ GameObject:
   - component: {fileID: 569817479}
   - component: {fileID: 569817481}
   - component: {fileID: 569817480}
+  - component: {fileID: 569817483}
+  - component: {fileID: 569817482}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -2778,8 +2780,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 133, y: -140}
-  m_SizeDelta: {x: -266, y: -220}
+  m_AnchoredPosition: {x: 133.385, y: -140}
+  m_SizeDelta: {x: -266.77, y: -220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569817480
 MonoBehaviour:
@@ -2819,6 +2821,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569817478}
   m_CullTransparentMesh: 1
+--- !u!95 &569817482
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569817478}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a9a12f40935879143b706dfc1ce522cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!111 &569817483
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569817478}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: fd4605ac6123b3341894cffeee6dd57f, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: fd4605ac6123b3341894cffeee6dd57f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &576915866
 GameObject:
   m_ObjectHideFlags: 0
@@ -9498,6 +9539,8 @@ MonoBehaviour:
   mouseSensitivity: 20
   playerCamera: {fileID: 330585546}
   cameraLock: 0
+  dogPrefab: {fileID: 4886086353931582258, guid: 4b180182a15140a4e953590073b93fdf, type: 3}
+  gunANimator: {fileID: 569817482}
 --- !u!54 &1122750998
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -19,6 +19,11 @@ public class playerController : MonoBehaviour
     float forwardInput;
     Animator animator;
 
+    [Header("Shooting")]
+    public GameObject dogPrefab;
+    public Animator gunANimator;
+
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -34,6 +39,14 @@ public class playerController : MonoBehaviour
         {
             Look();
         }
+       
+        // On spacebar press, send dog
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Instantiate(dogPrefab, playerCamera.position, playerCamera.rotation);
+            gunANimator.SetTrigger("bang");
+        }
+        
         Move();
     }
 
