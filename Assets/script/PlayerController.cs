@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class playerController : MonoBehaviour
 {
@@ -23,6 +24,16 @@ public class playerController : MonoBehaviour
     public GameObject dogPrefab;
     public Animator gunANimator;
 
+    [Header("Auto Fire")]
+    public bool autoFire = false;
+    public float fireRate = 20f;
+
+    [Header("Gun Music")]
+    public AudioSource musicSource;
+    public float shotMusicTime = 0.1f;
+
+    private float nextFireTime = 0f;
+
 
     void Start()
     {
@@ -39,15 +50,43 @@ public class playerController : MonoBehaviour
         {
             Look();
         }
-       
+
         // On spacebar press, send dog
+        if (autoFire && Input.GetKey(KeyCode.Mouse0))
+        {
+            if (Time.time >= nextFireTime)
+            {
+                nextFireTime = Time.time + 1f / fireRate;
+
+                Vector3 spawnPos = playerCamera.position + playerCamera.forward * 1f;
+                StartCoroutine(PlayShotMusic());
+
+                Instantiate(dogPrefab, spawnPos, playerCamera.rotation);
+                gunANimator.SetTrigger("bang");
+            }
+        } else
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Instantiate(dogPrefab, playerCamera.position, playerCamera.rotation);
+            Vector3 spawnPos = playerCamera.position + playerCamera.forward * 1f;
+            StartCoroutine(PlayShotMusic());
+
+            Instantiate(dogPrefab, spawnPos, playerCamera.rotation);
             gunANimator.SetTrigger("bang");
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            autoFire = !autoFire;
+        }
+
         Move();
+    }
+
+    IEnumerator PlayShotMusic()
+    {
+        musicSource.UnPause();
+        yield return new WaitForSeconds(shotMusicTime);
+        musicSource.Pause();
     }
 
     void Look()

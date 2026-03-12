@@ -2,24 +2,30 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-
     public float speed;
     public float waitTime = 5.0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public GameObject hitEffect; // particle effect prefab
 
-    // Update is called once per frame
     void Update()
     {
-        waitTime-=1*Time.deltaTime;
+        waitTime -= Time.deltaTime;
+
         if (waitTime < 0)
         {
             Destroy(gameObject);
         }
+
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (hitEffect != null)
+        {
+            Instantiate(hitEffect, transform.position, Quaternion.identity);
+        }
+
+        Destroy(gameObject);
     }
 }
